@@ -1,191 +1,406 @@
-RGPD — Traitement des données personnelles
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité — MyProphète</title>
+<link rel="icon" type="image/png" href="images/icon.png">
+<style>
+  :root{
+    --ink:#2b2333;
+    --ink-soft:#5a5266;
+    --paper:#faf7f2;
+    --line:#e7e0d6;
+    --accent:#6b4f8f;
+    --accent-soft:#efe9f6;
+    --gold:#b8935a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Georgia","Iowan Old Style",serif;
+    line-height:1.65;
+  }
+  a{color:var(--accent);}
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 24px;
+    border-bottom:1px solid var(--line);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  .topbar a.home{
+    font-weight:600;
+    letter-spacing:.02em;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:15px;
+  }
+  .topbar .home::before{content:"← "; color:var(--accent);}
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:48px 24px 96px;
+  }
+  header.doc-head{
+    text-align:center;
+    margin-bottom:48px;
+  }
+  header.doc-head h1{
+    font-size:2.1rem;
+    margin:0 0 6px;
+    font-weight:500;
+  }
+  header.doc-head p.tagline{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink-soft);
+    font-size:14px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    margin:0 0 14px;
+  }
+  header.doc-head p.meta{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink-soft);
+    font-size:13px;
+    margin:0;
+  }
+  nav.toc{
+    background:var(--accent-soft);
+    border-radius:10px;
+    padding:20px 24px;
+    margin:0 0 48px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:14px;
+  }
+  nav.toc h2{
+    font-family:inherit;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--accent);
+    margin:0 0 10px;
+  }
+  nav.toc ol{margin:0;padding-left:20px;columns:2;column-gap:24px;}
+  nav.toc li{margin-bottom:6px;break-inside:avoid;}
+  nav.toc a{text-decoration:none;color:var(--ink-soft);}
+  nav.toc a:hover{color:var(--accent);}
+  section{margin-bottom:40px;}
+  h2{
+    font-size:1.3rem;
+    font-weight:500;
+    border-bottom:1px solid var(--line);
+    padding-bottom:8px;
+    margin:0 0 16px;
+    scroll-margin-top:20px;
+  }
+  h3{
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--accent);
+    margin:24px 0 8px;
+    scroll-margin-top:20px;
+  }
+  p{margin:0 0 12px;}
+  ul{margin:0 0 12px;padding-left:22px;}
+  li{margin-bottom:6px;}
+  .box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 22px;
+    margin:0 0 16px;
+  }
+  .box p{margin:0 0 6px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:14.5px;}
+  .box p:last-child{margin-bottom:0;}
+  .box .label{color:var(--ink-soft);font-size:12px;text-transform:uppercase;letter-spacing:.04em;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:13.5px;
+    margin:0 0 20px;
+  }
+  th,td{
+    text-align:left;
+    padding:10px 12px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  th{
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-weight:600;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+  }
+  .table-wrap{overflow-x:auto;margin-bottom:20px;}
+  .note{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:13px;
+    color:var(--ink-soft);
+    border-left:3px solid var(--gold);
+    padding:8px 14px;
+    background:#fdf9f0;
+    border-radius:0 6px 6px 0;
+  }
+  footer{
+    text-align:center;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  @media (max-width:600px){
+    nav.toc ol{columns:1;}
+    header.doc-head h1{font-size:1.6rem;}
+  }
+</style>
+</head>
+<body>
 
-Politique de confidentialité
-Version 1.3 — dernière mise à jour : août 2026
+<div class="topbar">
+  <a class="home" href="/">MyProphète</a>
+  <span style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px;color:var(--ink-soft);">Politique de confidentialité</span>
+</div>
 
-Sommaire
-Introduction et responsable de traitement
-Données collectées
-Finalités et bases légales
-Sous-traitants et transferts
-Durée de conservation
-Vos droits
-Sécurité des données
-Cookies et traceurs
-Protection des mineurs
-Modifications de la politique
-Contact
-1. Introduction et objet du document
-La présente politique de confidentialité décrit comment l'application mobile MyProphète (ci-après « l'application ») collecte, utilise, stocke, protège et partage les données personnelles de ses utilisateurs. Elle constitue la mise en conformité de l'application avec le Règlement Général sur la Protection des Données (RGPD, Règlement UE 2016/679), applicable à tout utilisateur résidant dans l'Union européenne, ainsi qu'avec les législations équivalentes en vigueur dans les pays où l'application est distribuée (UK GDPR, California Consumer Privacy Act, etc.).
+<main>
+  <header class="doc-head">
+    <p class="tagline">RGPD — Traitement des données personnelles</p>
+    <h1>Politique de confidentialité</h1>
+    <p class="meta">Version 1.3 — dernière mise à jour : août 2026</p>
+  </header>
 
-L'application propose un service de guidance symbolique quotidienne basée sur des systèmes divinatoires traditionnels (Tarot, Runes, Yi King) et des calculs astrologiques/numérologiques. Ce document informe l'utilisateur de ses droits et des engagements du responsable de traitement.
+  <nav class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#s1">Introduction et responsable de traitement</a></li>
+      <li><a href="#s2">Données collectées</a></li>
+      <li><a href="#s3">Finalités et bases légales</a></li>
+      <li><a href="#s4">Sous-traitants et transferts</a></li>
+      <li><a href="#s5">Durée de conservation</a></li>
+      <li><a href="#s6">Vos droits</a></li>
+      <li><a href="#s7">Sécurité des données</a></li>
+      <li><a href="#s8">Cookies et traceurs</a></li>
+      <li><a href="#s9">Protection des mineurs</a></li>
+      <li><a href="#s10">Modifications de la politique</a></li>
+      <li><a href="#s11">Contact</a></li>
+    </ol>
+  </nav>
 
-1.1 Identité du responsable de traitement
-Responsable de traitement
-MIQUEL
+  <section id="s1">
+    <h2>1. Introduction et objet du document</h2>
+    <p>La présente politique de confidentialité décrit comment l'application mobile MyProphète (ci-après « l'application ») collecte, utilise, stocke, protège et partage les données personnelles de ses utilisateurs. Elle constitue la mise en conformité de l'application avec le Règlement Général sur la Protection des Données (RGPD, Règlement UE 2016/679), applicable à tout utilisateur résidant dans l'Union européenne, ainsi qu'avec les législations équivalentes en vigueur dans les pays où l'application est distribuée (UK GDPR, California Consumer Privacy Act, etc.).</p>
+    <p>L'application propose un service de guidance symbolique quotidienne basée sur des systèmes divinatoires traditionnels (Tarot, Runes, Yi King) et des calculs astrologiques/numérologiques. Ce document informe l'utilisateur de ses droits et des engagements du responsable de traitement.</p>
 
-Adresse
-Sofia, Bulgarie
+    <h3>1.1 Identité du responsable de traitement</h3>
+    <div class="box">
+      <p><span class="label">Responsable de traitement</span><br>MIQUEL</p>
+      <p><span class="label">Adresse</span><br>Sofia, Bulgarie</p>
+      <p><span class="label">Statut / numéro d'enregistrement</span><br>Activité individuelle enregistrée en Bulgarie (EIK/BULSTAT en cours d'attribution)</p>
+      <p><span class="label">E-mail de contact RGPD</span><br><a href="mailto:contact@myprophete.com">contact@myprophete.com</a></p>
+    </div>
 
-Statut / numéro d'enregistrement
-Activité individuelle enregistrée en Bulgarie (EIK/BULSTAT en cours d'attribution)
+    <h3>1.2 Portée géographique</h3>
+    <p>L'application est distribuée mondialement sur Google Play Store et Apple App Store. Les traitements décrits dans ce document s'appliquent à tous les utilisateurs, indépendamment de leur pays de résidence. Les droits accordés respectent le niveau le plus protecteur applicable (RGPD).</p>
+  </section>
 
-E-mail de contact RGPD
-contact@myprophete.com
+  <section id="s2">
+    <h2>2. Données personnelles collectées</h2>
+    <p>Le tableau ci-dessous inventorie les données personnelles traitées par l'application, leur finalité, leur base légale et leur durée de conservation.</p>
 
-1.2 Portée géographique
-L'application est distribuée mondialement sur Google Play Store et Apple App Store. Les traitements décrits dans ce document s'appliquent à tous les utilisateurs, indépendamment de leur pays de résidence. Les droits accordés respectent le niveau le plus protecteur applicable (RGPD).
+    <div class="table-wrap">
+      <table>
+        <tr><th>Catégorie</th><th>Données précises</th><th>Finalité</th><th>Base légale</th><th>Rétention</th></tr>
+        <tr><td>Identification</td><td>E-mail (compte), UID Firebase, prénom</td><td>Authentification, personnalisation</td><td>Exécution du contrat (Art. 6.1.b)</td><td>Jusqu'à suppression du compte</td></tr>
+        <tr><td>Naissance</td><td>Date, heure, ville et pays de naissance ; coordonnées GPS calculées par géocodage ; fuseau horaire</td><td>Calcul du thème natal, numérologie, biorythmes</td><td>Exécution du contrat (Art. 6.1.b)</td><td>Jusqu'à suppression du compte</td></tr>
+        <tr><td>Utilisation</td><td>Consultations symboliques, humeurs journalières, rituels cochés, bilans périodiques</td><td>Fonctionnement principal, historique personnel</td><td>Exécution du contrat (Art. 6.1.b)</td><td>Jusqu'à suppression du compte</td></tr>
+        <tr><td>Relations</td><td>Partenaires enregistrés pour synastrie : prénom, date/heure/ville/pays de naissance</td><td>Fonctionnalité de synastrie</td><td>Exécution du contrat + responsabilité utilisateur (voir §2.3)</td><td>Jusqu'à suppression par l'utilisateur ou du compte</td></tr>
+        <tr><td>Économique</td><td>Solde Lumens, historique d'achats in-app, type d'abonnement, dates début/fin</td><td>Gestion du portefeuille virtuel et des abonnements</td><td>Exécution du contrat + obligation légale (Art. 6.1.c)</td><td>10 ans (achats) ; sinon jusqu'à suppression du compte</td></tr>
+        <tr><td>Techniques</td><td>Langue, thème visuel, timestamps d'accès (rate limiting), préférences de notifications</td><td>Fonctionnement technique, prévention d'abus</td><td>Intérêt légitime (Art. 6.1.f)</td><td>Rate limiting : 24h glissantes ; préférences : jusqu'à suppression</td></tr>
+      </table>
+    </div>
 
-2. Données personnelles collectées
-Le tableau ci-dessous inventorie les données personnelles traitées par l'application, leur finalité, leur base légale et leur durée de conservation.
+    <h3>2.1 Données non collectées</h3>
+    <p>MyProphète ne collecte pas les données suivantes :</p>
+    <ul>
+      <li>Contacts du téléphone</li>
+      <li>Localisation géographique en temps réel (GPS de l'appareil) — la géolocalisation concerne uniquement la ville de naissance saisie par l'utilisateur</li>
+      <li>Photos, fichiers, messages ou médias stockés sur l'appareil</li>
+      <li>Historique de navigation web</li>
+      <li>Données biométriques (empreintes, reconnaissance faciale)</li>
+      <li>Identifiants publicitaires (IDFA, AAID) — l'application ne diffuse aucune publicité</li>
+    </ul>
 
-Catégorie	Données précises	Finalité	Base légale	Rétention
-Identification	E-mail (compte), UID Firebase, prénom	Authentification, personnalisation	Exécution du contrat (Art. 6.1.b)	Jusqu'à suppression du compte
-Naissance	Date, heure, ville et pays de naissance ; coordonnées GPS calculées par géocodage ; fuseau horaire	Calcul du thème natal, numérologie, biorythmes	Exécution du contrat (Art. 6.1.b)	Jusqu'à suppression du compte
-Utilisation	Consultations symboliques, humeurs journalières, rituels cochés, bilans périodiques	Fonctionnement principal, historique personnel	Exécution du contrat (Art. 6.1.b)	Jusqu'à suppression du compte
-Relations	Partenaires enregistrés pour synastrie : prénom, date/heure/ville/pays de naissance	Fonctionnalité de synastrie	Exécution du contrat + responsabilité utilisateur (voir §2.3)	Jusqu'à suppression par l'utilisateur ou du compte
-Économique	Solde Lumens, historique d'achats in-app, type d'abonnement, dates début/fin	Gestion du portefeuille virtuel et des abonnements	Exécution du contrat + obligation légale (Art. 6.1.c)	10 ans (achats) ; sinon jusqu'à suppression du compte
-Techniques	Langue, thème visuel, timestamps d'accès (rate limiting), préférences de notifications	Fonctionnement technique, prévention d'abus	Intérêt légitime (Art. 6.1.f)	Rate limiting : 24h glissantes ; préférences : jusqu'à suppression
-2.1 Données non collectées
-MyProphète ne collecte pas les données suivantes :
+    <h3>2.2 Données de santé et catégories particulières</h3>
+    <p>MyProphète ne collecte pas intentionnellement de données relevant de l'Article 9 du RGPD (données sensibles : santé, opinions politiques, orientation sexuelle, convictions religieuses, etc.).</p>
+    <p>Toutefois, l'utilisateur peut volontairement poser des questions à l'oracle qui évoquent sa santé mentale, sa vie affective, ses croyances ou ses convictions. Ces contenus sont traités avec la même confidentialité que le reste des consultations, ne sont jamais analysés à des fins statistiques et ne sont jamais partagés avec des tiers à des fins commerciales.</p>
+    <p>Un mécanisme de détection de détresse émotionnelle est en place : si l'utilisateur formule une question suggérant un risque psychologique grave (idées suicidaires, etc.), l'application interrompt la consultation et propose des ressources d'aide professionnelle (lignes d'écoute nationales). Aucun échange n'est alors enregistré.</p>
 
-Contacts du téléphone
-Localisation géographique en temps réel (GPS de l'appareil) — la géolocalisation concerne uniquement la ville de naissance saisie par l'utilisateur
-Photos, fichiers, messages ou médias stockés sur l'appareil
-Historique de navigation web
-Données biométriques (empreintes, reconnaissance faciale)
-Identifiants publicitaires (IDFA, AAID) — l'application ne diffuse aucune publicité
-2.2 Données de santé et catégories particulières
-MyProphète ne collecte pas intentionnellement de données relevant de l'Article 9 du RGPD (données sensibles : santé, opinions politiques, orientation sexuelle, convictions religieuses, etc.).
+    <h3>2.3 Données de partenaires (synastrie)</h3>
+    <p>La fonctionnalité de synastrie permet à l'utilisateur d'enregistrer les données de naissance de tiers (partenaire amoureux, ami, famille). L'utilisateur s'engage, lors de la saisie, à avoir obtenu le consentement de la personne concernée pour l'enregistrement de ses données à des fins de calcul astrologique personnel.</p>
+    <p>Ces données sont strictement réservées à l'utilisateur qui les a saisies : elles ne sont jamais partagées, ni avec d'autres utilisateurs, ni avec des tiers, ni utilisées à d'autres fins. Un tiers concerné peut demander leur suppression en contactant l'utilisateur qui les a saisies, ou en contactant directement le support MyProphète qui procédera à une suppression sur preuve d'identité.</p>
+  </section>
 
-Toutefois, l'utilisateur peut volontairement poser des questions à l'oracle qui évoquent sa santé mentale, sa vie affective, ses croyances ou ses convictions. Ces contenus sont traités avec la même confidentialité que le reste des consultations, ne sont jamais analysés à des fins statistiques et ne sont jamais partagés avec des tiers à des fins commerciales.
+  <section id="s3">
+    <h2>3. Finalités et bases légales du traitement</h2>
 
-Un mécanisme de détection de détresse émotionnelle est en place : si l'utilisateur formule une question suggérant un risque psychologique grave (idées suicidaires, etc.), l'application interrompt la consultation et propose des ressources d'aide professionnelle (lignes d'écoute nationales). Aucun échange n'est alors enregistré.
+    <h3>3.1 Exécution du contrat (Article 6.1.b RGPD)</h3>
+    <p>La grande majorité des traitements sont nécessaires à l'exécution du service :</p>
+    <ul>
+      <li>Fournir l'accès à l'application via un compte authentifié</li>
+      <li>Calculer le thème natal, les biorythmes et les données numérologiques personnalisées</li>
+      <li>Générer les interprétations oraculaires personnalisées via l'IA Claude d'Anthropic</li>
+      <li>Tenir à jour l'historique des consultations et bilans de l'utilisateur</li>
+      <li>Gérer le portefeuille de Lumens et les abonnements</li>
+    </ul>
 
-2.3 Données de partenaires (synastrie)
-La fonctionnalité de synastrie permet à l'utilisateur d'enregistrer les données de naissance de tiers (partenaire amoureux, ami, famille). L'utilisateur s'engage, lors de la saisie, à avoir obtenu le consentement de la personne concernée pour l'enregistrement de ses données à des fins de calcul astrologique personnel.
+    <h3>3.2 Obligation légale (Article 6.1.c RGPD)</h3>
+    <p>Les données liées aux achats in-app sont conservées pendant 10 ans au titre des obligations comptables et fiscales.</p>
 
-Ces données sont strictement réservées à l'utilisateur qui les a saisies : elles ne sont jamais partagées, ni avec d'autres utilisateurs, ni avec des tiers, ni utilisées à d'autres fins. Un tiers concerné peut demander leur suppression en contactant l'utilisateur qui les a saisies, ou en contactant directement le support MyProphète qui procédera à une suppression sur preuve d'identité.
+    <h3>3.3 Intérêt légitime (Article 6.1.f RGPD)</h3>
+    <p>Les mesures de sécurité technique (rate limiting, journalisation des erreurs, prévention des abus) reposent sur l'intérêt légitime du responsable de traitement à maintenir un service fiable et à protéger ses utilisateurs.</p>
 
-3. Finalités et bases légales du traitement
-3.1 Exécution du contrat (Article 6.1.b RGPD)
-La grande majorité des traitements sont nécessaires à l'exécution du service :
+    <h3>3.4 Consentement (Article 6.1.a RGPD)</h3>
+    <p>Un consentement explicite est requis pour :</p>
+    <ul>
+      <li>L'envoi de notifications push quotidiennes (optionnel, désactivable depuis les paramètres de l'application et du système d'exploitation)</li>
+      <li>Les e-mails de relance d'engagement (fonctionnalité à venir)</li>
+      <li>Tout usage futur des données à des fins d'amélioration du modèle d'IA (non pratiqué à ce jour, voir §4.2)</li>
+    </ul>
+  </section>
 
-Fournir l'accès à l'application via un compte authentifié
-Calculer le thème natal, les biorythmes et les données numérologiques personnalisées
-Générer les interprétations oraculaires personnalisées via l'IA Claude d'Anthropic
-Tenir à jour l'historique des consultations et bilans de l'utilisateur
-Gérer le portefeuille de Lumens et les abonnements
-3.2 Obligation légale (Article 6.1.c RGPD)
-Les données liées aux achats in-app sont conservées pendant 10 ans au titre des obligations comptables et fiscales.
+  <section id="s4">
+    <h2>4. Sous-traitants et destinataires des données</h2>
+    <p>MyProphète fait appel à plusieurs prestataires techniques pour fournir le service. Aucune donnée n'est vendue, louée ou partagée à des fins commerciales avec des tiers.</p>
 
-3.3 Intérêt légitime (Article 6.1.f RGPD)
-Les mesures de sécurité technique (rate limiting, journalisation des erreurs, prévention des abus) reposent sur l'intérêt légitime du responsable de traitement à maintenir un service fiable et à protéger ses utilisateurs.
+    <div class="table-wrap">
+      <table>
+        <tr><th>Prestataire</th><th>Rôle</th><th>Données transmises</th><th>Pays</th><th>Conformité</th></tr>
+        <tr><td>Google Firebase</td><td>Authentification, base de données, Cloud Functions, hébergement, sauvegardes</td><td>Toutes les données utilisateur (chiffrées)</td><td>UE (europe-west1, Belgique)</td><td>DPA signé, ISO 27001/27017/27018, CCT UE</td></tr>
+        <tr><td>Anthropic (Claude)</td><td>Génération des interprétations oraculaires par IA</td><td>Question posée, profil anonymisé, cartes tirées — jamais le nom, l'e-mail ou la date de naissance exacte</td><td>États-Unis</td><td>DPA signé, données non utilisées pour l'entraînement, CCT UE</td></tr>
+        <tr><td>RapidAPI / Astrologer API</td><td>Calcul du thème natal (positions planétaires)</td><td>Date, heure, latitude, longitude, fuseau — jamais nominatif</td><td>UE</td><td>Données techniques anonymes</td></tr>
+        <tr><td>RevenueCat</td><td>Gestion des abonnements et achats in-app</td><td>UID Firebase, identifiant produit, statut d'abonnement</td><td>États-Unis</td><td>DPA signé, CCT UE</td></tr>
+        <tr><td>Google Play / Apple App Store</td><td>Distribution, paiements mobiles</td><td>Selon politiques Google/Apple — pas de données bancaires reçues par MyProphète</td><td>Global</td><td>Responsables de traitement indépendants</td></tr>
+      </table>
+    </div>
 
-3.4 Consentement (Article 6.1.a RGPD)
-Un consentement explicite est requis pour :
+    <h3>4.1 Transferts hors Union européenne</h3>
+    <p>Les transferts vers Anthropic et RevenueCat (États-Unis) sont encadrés par les Clauses Contractuelles Types (CCT) de la Commission européenne. Les données sensibles identifiantes (nom, e-mail, date de naissance complète) ne sont jamais transmises à Anthropic : seul un profil symbolique anonymisé est envoyé pour la génération des interprétations.</p>
 
-L'envoi de notifications push quotidiennes (optionnel, désactivable depuis les paramètres de l'application et du système d'exploitation)
-Les e-mails de relance d'engagement (fonctionnalité à venir)
-Tout usage futur des données à des fins d'amélioration du modèle d'IA (non pratiqué à ce jour, voir §4.2)
-4. Sous-traitants et destinataires des données
-MyProphète fait appel à plusieurs prestataires techniques pour fournir le service. Aucune donnée n'est vendue, louée ou partagée à des fins commerciales avec des tiers.
+    <h3>4.2 Non-utilisation pour l'entraînement d'IA</h3>
+    <p>Les conversations et consultations de l'utilisateur avec l'IA Claude ne sont pas utilisées pour entraîner ou améliorer les modèles d'Anthropic. Anthropic s'engage contractuellement à conserver les requêtes au maximum 30 jours pour des raisons de détection d'abus, puis à les supprimer. MyProphète n'a aucun accès aux données conservées par Anthropic.</p>
+  </section>
 
-Prestataire	Rôle	Données transmises	Pays	Conformité
-Google Firebase	Authentification, base de données, Cloud Functions, hébergement, sauvegardes	Toutes les données utilisateur (chiffrées)	UE (europe-west1, Belgique)	DPA signé, ISO 27001/27017/27018, CCT UE
-Anthropic (Claude)	Génération des interprétations oraculaires par IA	Question posée, profil anonymisé, cartes tirées — jamais le nom, l'e-mail ou la date de naissance exacte	États-Unis	DPA signé, données non utilisées pour l'entraînement, CCT UE
-RapidAPI / Astrologer API	Calcul du thème natal (positions planétaires)	Date, heure, latitude, longitude, fuseau — jamais nominatif	UE	Données techniques anonymes
-RevenueCat	Gestion des abonnements et achats in-app	UID Firebase, identifiant produit, statut d'abonnement	États-Unis	DPA signé, CCT UE
-Google Play / Apple App Store	Distribution, paiements mobiles	Selon politiques Google/Apple — pas de données bancaires reçues par MyProphète	Global	Responsables de traitement indépendants
-4.1 Transferts hors Union européenne
-Les transferts vers Anthropic et RevenueCat (États-Unis) sont encadrés par les Clauses Contractuelles Types (CCT) de la Commission européenne. Les données sensibles identifiantes (nom, e-mail, date de naissance complète) ne sont jamais transmises à Anthropic : seul un profil symbolique anonymisé est envoyé pour la génération des interprétations.
+  <section id="s5">
+    <h2>5. Durée de conservation des données</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Type de données</th><th>Durée</th><th>Justification</th></tr>
+        <tr><td>Compte utilisateur actif</td><td>Jusqu'à demande de suppression, ou 3 ans d'inactivité</td><td>Fonctionnement du service</td></tr>
+        <tr><td>Données d'achats in-app</td><td>10 ans</td><td>Obligation comptable</td></tr>
+        <tr><td>Journaux techniques</td><td>30 jours</td><td>Diagnostic</td></tr>
+        <tr><td>Compteurs de rate limiting</td><td>24 heures glissantes</td><td>Durée fonctionnelle stricte</td></tr>
+        <tr><td>Sauvegardes automatiques</td><td>30 jours</td><td>Disaster recovery</td></tr>
+        <tr><td>Cache astrologique et citations du jour</td><td>Indéfini</td><td>Données non identifiantes</td></tr>
+        <tr><td>Requêtes envoyées à Anthropic</td><td>30 jours maximum</td><td>Détection d'abus uniquement</td></tr>
+      </table>
+    </div>
+    <p>À l'expiration de chaque durée de conservation, les données sont effectivement supprimées de l'infrastructure, y compris des sauvegardes. La suppression est irréversible.</p>
+  </section>
 
-4.2 Non-utilisation pour l'entraînement d'IA
-Les conversations et consultations de l'utilisateur avec l'IA Claude ne sont pas utilisées pour entraîner ou améliorer les modèles d'Anthropic. Anthropic s'engage contractuellement à conserver les requêtes au maximum 30 jours pour des raisons de détection d'abus, puis à les supprimer. MyProphète n'a aucun accès aux données conservées par Anthropic.
+  <section id="s6">
+    <h2>6. Droits des utilisateurs</h2>
+    <p>Conformément au RGPD et aux législations équivalentes, chaque utilisateur dispose des droits suivants. Ils peuvent être exercés directement depuis l'application (menu Paramètres) ou par e-mail à <a href="mailto:contact@myprophete.com">contact@myprophete.com</a>.</p>
 
-5. Durée de conservation des données
-Type de données	Durée	Justification
-Compte utilisateur actif	Jusqu'à demande de suppression, ou 3 ans d'inactivité	Fonctionnement du service
-Données d'achats in-app	10 ans	Obligation comptable
-Journaux techniques	30 jours	Diagnostic
-Compteurs de rate limiting	24 heures glissantes	Durée fonctionnelle stricte
-Sauvegardes automatiques	30 jours	Disaster recovery
-Cache astrologique et citations du jour	Indéfini	Données non identifiantes
-Requêtes envoyées à Anthropic	30 jours maximum	Détection d'abus uniquement
-À l'expiration de chaque durée de conservation, les données sont effectivement supprimées de l'infrastructure, y compris des sauvegardes. La suppression est irréversible.
+    <h3>6.1 Droit d'accès</h3>
+    <p>Consultation de l'ensemble des données depuis l'application (Profil, Journal, historique). Une fonctionnalité d'export permet de télécharger une copie complète au format JSON compressé (ZIP) — profil, historique, bilans, partenaires, préférences. Délai : 30 jours (en pratique, immédiat via l'export intégré).</p>
 
-6. Droits des utilisateurs
-Conformément au RGPD et aux législations équivalentes, chaque utilisateur dispose des droits suivants. Ils peuvent être exercés directement depuis l'application (menu Paramètres) ou par e-mail à contact@myprophete.com.
+    <h3>6.2 Droit de rectification</h3>
+    <p>Correction des informations personnelles (prénom, date/heure/lieu de naissance, langue, thème visuel) depuis les Paramètres, à tout moment et sans justification.</p>
 
-6.1 Droit d'accès
-Consultation de l'ensemble des données depuis l'application (Profil, Journal, historique). Une fonctionnalité d'export permet de télécharger une copie complète au format JSON compressé (ZIP) — profil, historique, bilans, partenaires, préférences. Délai : 30 jours (en pratique, immédiat via l'export intégré).
+    <h3>6.3 Droit à l'effacement</h3>
+    <p>Suppression du compte depuis les Paramètres : suppression définitive des données sous 30 jours, suppression du compte d'authentification, impossibilité de recouvrer les données après suppression. Exception : les données d'achats peuvent être conservées anonymisées pour les obligations comptables.</p>
 
-6.2 Droit de rectification
-Correction des informations personnelles (prénom, date/heure/lieu de naissance, langue, thème visuel) depuis les Paramètres, à tout moment et sans justification.
+    <h3>6.4 Droit à la limitation du traitement</h3>
+    <p>En cas de contestation de l'exactitude des données, suspension possible du traitement le temps de la vérification, sur demande par e-mail.</p>
 
-6.3 Droit à l'effacement
-Suppression du compte depuis les Paramètres : suppression définitive des données sous 30 jours, suppression du compte d'authentification, impossibilité de recouvrer les données après suppression. Exception : les données d'achats peuvent être conservées anonymisées pour les obligations comptables.
+    <h3>6.5 Droit à la portabilité</h3>
+    <p>L'export prévu au §6.1 est fourni dans un format structuré et lisible par machine (JSON).</p>
 
-6.4 Droit à la limitation du traitement
-En cas de contestation de l'exactitude des données, suspension possible du traitement le temps de la vérification, sur demande par e-mail.
+    <h3>6.6 Droit d'opposition</h3>
+    <p>Opposition possible à certains traitements fondés sur l'intérêt légitime, notamment les notifications, via les paramètres.</p>
 
-6.5 Droit à la portabilité
-L'export prévu au §6.1 est fourni dans un format structuré et lisible par machine (JSON).
+    <h3>6.7 Droit de retrait du consentement</h3>
+    <p>Tout consentement donné peut être retiré à tout moment, sans rétroactivité, depuis les paramètres.</p>
 
-6.6 Droit d'opposition
-Opposition possible à certains traitements fondés sur l'intérêt légitime, notamment les notifications, via les paramètres.
+    <h3>6.8 Droit de réclamation auprès d'une autorité de contrôle</h3>
+    <p>Le responsable de traitement étant établi en Bulgarie, l'autorité principale est la Commission bulgare de protection des données (CPDP — <a href="https://www.cpdp.bg" target="_blank" rel="noopener">www.cpdp.bg</a>). Les résidents d'autres États membres peuvent saisir leur autorité nationale — liste complète sur <a href="https://edpb.europa.eu" target="_blank" rel="noopener">edpb.europa.eu</a>.</p>
 
-6.7 Droit de retrait du consentement
-Tout consentement donné peut être retiré à tout moment, sans rétroactivité, depuis les paramètres.
+    <h3>6.9 Délai de réponse</h3>
+    <p>MyProphète s'engage à répondre à toute demande dans un délai maximal de 30 jours, prolongeable de 60 jours en cas de complexité exceptionnelle, avec information du motif de prolongation.</p>
+  </section>
 
-6.8 Droit de réclamation auprès d'une autorité de contrôle
-Le responsable de traitement étant établi en Bulgarie, l'autorité principale est la Commission bulgare de protection des données (CPDP — www.cpdp.bg). Les résidents d'autres États membres peuvent saisir leur autorité nationale — liste complète sur edpb.europa.eu.
+  <section id="s7">
+    <h2>7. Sécurité des données</h2>
+    <h3>7.1 Mesures techniques</h3>
+    <ul>
+      <li>Chiffrement TLS 1.3 de toutes les communications</li>
+      <li>Chiffrement au repos de la base Firestore (AES-256)</li>
+      <li>Authentification forte (Firebase Auth, e-mail/mot de passe ou Google Sign-In OAuth 2.0)</li>
+      <li>Règles de sécurité Firestore strictes : accès limité aux données propres de chaque utilisateur</li>
+      <li>Rate limiting sur les fonctions sensibles</li>
+      <li>Vérification de solde côté serveur pour toute opération économique</li>
+      <li>Sauvegardes automatiques quotidiennes, 30 jours de rétention, région UE</li>
+      <li>Logs d'audit des opérations sensibles</li>
+    </ul>
+    <h3>7.2 Mesures organisationnelles</h3>
+    <ul>
+      <li>Accès aux données de production limité aux administrateurs techniques identifiés</li>
+      <li>Principe du moindre privilège</li>
+      <li>Procédure de gestion des incidents de sécurité documentée</li>
+    </ul>
+    <h3>7.3 Notification de violation de données</h3>
+    <p>En cas de violation présentant un risque pour les utilisateurs, MyProphète s'engage à notifier l'autorité compétente sous 72 heures et à informer sans délai les utilisateurs concernés si le risque est élevé.</p>
+  </section>
 
-6.9 Délai de réponse
-MyProphète s'engage à répondre à toute demande dans un délai maximal de 30 jours, prolongeable de 60 jours en cas de complexité exceptionnelle, avec information du motif de prolongation.
+  <section id="s8">
+    <h2>8. Cookies et traceurs</h2>
+    <p>L'application mobile n'utilise pas de cookies publicitaires ou de traceurs tiers. Aucune donnée de navigation n'est collectée à des fins de profilage commercial.</p>
+    <p>Les seuls mécanismes de stockage local utilisés sont : les préférences locales (thème, langue, tutoriel — sans donnée identifiante), le jeton d'authentification chiffré, et le cache de ressources statiques de l'application.</p>
+  </section>
 
-7. Sécurité des données
-7.1 Mesures techniques
-Chiffrement TLS 1.3 de toutes les communications
-Chiffrement au repos de la base Firestore (AES-256)
-Authentification forte (Firebase Auth, e-mail/mot de passe ou Google Sign-In OAuth 2.0)
-Règles de sécurité Firestore strictes : accès limité aux données propres de chaque utilisateur
-Rate limiting sur les fonctions sensibles
-Vérification de solde côté serveur pour toute opération économique
-Sauvegardes automatiques quotidiennes, 30 jours de rétention, région UE
-Logs d'audit des opérations sensibles
-7.2 Mesures organisationnelles
-Accès aux données de production limité aux administrateurs techniques identifiés
-Principe du moindre privilège
-Procédure de gestion des incidents de sécurité documentée
-7.3 Notification de violation de données
-En cas de violation présentant un risque pour les utilisateurs, MyProphète s'engage à notifier l'autorité compétente sous 72 heures et à informer sans délai les utilisateurs concernés si le risque est élevé.
+  <section id="s9">
+    <h2>9. Protection des mineurs</h2>
+    <p>MyProphète est destinée à un public adulte. Les Conditions Générales d'Utilisation exigent d'avoir atteint la majorité légale du pays de résidence pour créer un compte, notamment en raison de la nature introspective des contenus et des achats in-app.</p>
+    <p>Le RGPD prévoit qu'un consentement de mineur est valide à partir de 16 ans (selon les États membres) ; la règle commerciale de MyProphète (18 ans) est plus restrictive, ce qui est autorisé pour des applications proposant des achats in-app.</p>
+    <p>Tout signalement d'un compte créé par un mineur entraîne la suspension immédiate, la suppression des données sous 30 jours sur demande du représentant légal, et le remboursement des achats récents selon les procédures Google Play / Apple App Store.</p>
+  </section>
 
-8. Cookies et traceurs
-L'application mobile n'utilise pas de cookies publicitaires ou de traceurs tiers. Aucune donnée de navigation n'est collectée à des fins de profilage commercial.
+  <section id="s10">
+    <h2>10. Modifications de la politique</h2>
+    <p>Cette politique peut être modifiée pour refléter des évolutions du service ou des exigences légales. Toute modification substantielle est notifiée par notification in-app, par e-mail (utilisateurs consentants), et par mise à jour de la date de version. L'utilisateur dispose de 30 jours après notification pour accepter les nouvelles conditions ou demander la suppression de son compte.</p>
+  </section>
 
-Les seuls mécanismes de stockage local utilisés sont : les préférences locales (thème, langue, tutoriel — sans donnée identifiante), le jeton d'authentification chiffré, et le cache de ressources statiques de l'application.
+  <section id="s11">
+    <h2>11. Contact et points d'entrée</h2>
+    <div class="box">
+      <p><span class="label">Contact RGPD</span><br><a href="mailto:contact@myprophete.com">contact@myprophete.com</a> — réponse sous 30 jours ouvrés maximum</p>
+      <p><span class="label">Support général</span><br><a href="mailto:support@myprophete.com">support@myprophete.com</a></p>
+      <p><span class="label">Autorité de contrôle</span><br>Commission bulgare de protection des données (CPDP) — <a href="https://www.cpdp.bg" target="_blank" rel="noopener">www.cpdp.bg</a></p>
+    </div>
+    <p class="note">Les résidents d'autres pays de l'UE peuvent saisir leur autorité nationale de protection des données. Pour les résidents français : CNIL — <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>. Liste complète : <a href="https://edpb.europa.eu" target="_blank" rel="noopener">edpb.europa.eu</a>.</p>
+  </section>
 
-9. Protection des mineurs
-MyProphète est destinée à un public adulte. Les Conditions Générales d'Utilisation exigent d'avoir atteint la majorité légale du pays de résidence pour créer un compte, notamment en raison de la nature introspective des contenus et des achats in-app.
+  <footer>
+    © 2026 MyProphète — Tous droits réservés
+  </footer>
+</main>
 
-Le RGPD prévoit qu'un consentement de mineur est valide à partir de 16 ans (selon les États membres) ; la règle commerciale de MyProphète (18 ans) est plus restrictive, ce qui est autorisé pour des applications proposant des achats in-app.
-
-Tout signalement d'un compte créé par un mineur entraîne la suspension immédiate, la suppression des données sous 30 jours sur demande du représentant légal, et le remboursement des achats récents selon les procédures Google Play / Apple App Store.
-
-10. Modifications de la politique
-Cette politique peut être modifiée pour refléter des évolutions du service ou des exigences légales. Toute modification substantielle est notifiée par notification in-app, par e-mail (utilisateurs consentants), et par mise à jour de la date de version. L'utilisateur dispose de 30 jours après notification pour accepter les nouvelles conditions ou demander la suppression de son compte.
-
-11. Contact et points d'entrée
-Contact RGPD
-contact@myprophete.com — réponse sous 30 jours ouvrés maximum
-
-Support général
-support@myprophete.com
-
-Autorité de contrôle
-Commission bulgare de protection des données (CPDP) — www.cpdp.bg
-
-Les résidents d'autres pays de l'UE peuvent saisir leur autorité nationale de protection des données. Pour les résidents français : CNIL — www.cnil.fr. Liste complète : edpb.europa.eu.
-
-© 2026 MyProphète — Tous droits réservés
+</body>
+</html>
