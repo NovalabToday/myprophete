@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suppression de compte — MyProphète</title>
+<link rel="icon" type="image/png" href="images/icon.png">
+<style>
+  :root{
+    --ink:#2b2333;
+    --ink-soft:#5a5266;
+    --paper:#faf7f2;
+    --line:#e7e0d6;
+    --accent:#6b4f8f;
+    --accent-soft:#efe9f6;
+    --gold:#b8935a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Georgia","Iowan Old Style",serif;
+    line-height:1.65;
+  }
+  a{color:var(--accent);}
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 24px;
+    border-bottom:1px solid var(--line);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  .topbar a.home{
+    font-weight:600;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:15px;
+  }
+  .topbar .home::before{content:"← "; color:var(--accent);}
+  main{
+    max-width:680px;
+    margin:0 auto;
+    padding:48px 24px 96px;
+  }
+  header.doc-head{text-align:center;margin-bottom:40px;}
+  header.doc-head h1{font-size:2rem;margin:0 0 6px;font-weight:500;}
+  header.doc-head p.tagline{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink-soft);font-size:14px;letter-spacing:.03em;
+    text-transform:uppercase;margin:0;
+  }
+  h2{font-size:1.2rem;font-weight:500;border-bottom:1px solid var(--line);padding-bottom:8px;margin:32px 0 14px;}
+  p{margin:0 0 12px;}
+  ol,ul{margin:0 0 16px;padding-left:22px;}
+  li{margin-bottom:8px;}
+  .box{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:18px 22px;margin:16px 0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:14.5px;
+  }
+  .box .label{color:var(--ink-soft);font-size:12px;text-transform:uppercase;letter-spacing:.04em;}
+  .note{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:13px;color:var(--ink-soft);
+    border-left:3px solid var(--gold);padding:8px 14px;
+    background:#fdf9f0;border-radius:0 6px 6px 0;margin:16px 0;
+  }
+  footer{
+    text-align:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:12.5px;color:var(--ink-soft);padding-top:24px;border-top:1px solid var(--line);margin-top:40px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="home" href="/">MyProphète</a>
+  <span style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px;color:var(--ink-soft);">Suppression de compte</span>
+</div>
+
+<main>
+  <header class="doc-head">
+    <p class="tagline">Vos données vous appartiennent</p>
+    <h1>Suppression de compte et de données</h1>
+  </header>
+
+  <p>Conformément à notre <a href="politique-confidentialite.html">politique de confidentialité</a>, vous pouvez à tout moment demander la suppression définitive de votre compte MyProphète et de toutes les données associées.</p>
+
+  <h2>Option 1 — Depuis l'application (recommandé, immédiat)</h2>
+  <ol>
+    <li>Ouvrez l'application MyProphète</li>
+    <li>Rendez-vous dans <strong>Paramètres</strong></li>
+    <li>Sélectionnez <strong>Supprimer mon compte</strong></li>
+    <li>Confirmez la suppression</li>
+  </ol>
+  <p>La suppression est traitée sous 30 jours maximum, généralement bien plus rapidement.</p>
+
+  <h2>Option 2 — Sans accès à l'application</h2>
+  <p>Si vous n'avez plus accès à l'application (téléphone perdu, application désinstallée, etc.), envoyez une demande de suppression à :</p>
+  <div class="box">
+    <p><span class="label">E-mail</span><br><a href="mailto:contact@myprophete.com?subject=Demande%20de%20suppression%20de%20compte">contact@myprophete.com</a></p>
+    <p><span class="label">À préciser dans votre message</span><br>L'adresse e-mail associée à votre compte MyProphète, pour que nous puissions identifier et supprimer les bonnes données.</p>
+  </div>
+  <p>Votre demande sera traitée sous 30 jours maximum.</p>
+
+  <h2>Données concernées et conservées</h2>
+  <p>La suppression efface : votre profil, vos données de naissance, votre historique de consultations, vos bilans, vos partenaires enregistrés (synastrie), votre solde de Lumens et vos préférences.</p>
+  <p>Exception : les données liées aux achats effectués (historique de transaction) peuvent être conservées sous forme anonymisée pendant 10 ans, conformément à nos obligations comptables et fiscales — voir §5 de la <a href="politique-confidentialite.html">politique de confidentialité</a>.</p>
+
+  <div class="note">La suppression de compte est définitive et irréversible : une fois traitée, vos données ne peuvent pas être récupérées.</div>
+
+  <footer>
+    © 2026 MyProphète — Tous droits réservés
+  </footer>
+</main>
+
+</body>
+</html>
