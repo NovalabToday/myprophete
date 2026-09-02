@@ -6,86 +6,70 @@
     <title>MyProphète — Votre guide spirituel quotidien</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="images/icon.png">
-
     <div class="lang-switch">
         <a href="./">FR</a>
-        <!-- AUTRES LANGUES POUR PLUS TARD 
+        <!-- AUTRES LANGUES POUR PLUS TARD
         <a href="/myprophete/en/">EN</a>
         <a href="/myprophete/es/">ES</a>
         <a href="/myprophete/de/">DE</a>
-        <a href="/myprophete/ru/">RU</a> 
+        <a href="/myprophete/ru/">RU</a>
         -->
     </div>
-
 </head>
-
 <body>
-
     <!-- HERO -->
     <header class="hero">
         <img src="images/hero.png" alt="Hero MyProphète" class="hero-img">
         <div class="hero-overlay"></div>
-
         <div class="hero-content">
             <h1>Votre guide spirituel quotidien</h1>
             <p class="subtitle">Messages inspirants, rituels personnalisés et révélations intuitives.</p>
-
         <div class="store-buttons">
             <img src="images/icon.png" class="app-icon" alt="Icône MyProphète">
-
-            <a href="#" class="store-badge">
-                <img src="images/ios.png" alt="Télécharger sur l’App Store">
-            </a>
-
-            <a href="#" class="store-badge">
-                <img src="images/android.png" alt="Disponible sur Google Play">
-            </a>
+            <div class="store-badges-stack">
+                <a href="https://apps.apple.com/app/id6802809138" class="store-badge">
+                    <img src="images/ios.png" alt="Télécharger sur l’App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.myprophete_app" class="store-badge">
+                    <img src="images/android.png" alt="Disponible sur Google Play">
+                </a>
+            </div>
         </div>
-
-
         </div>
     </header>
-
     <!-- FONCTIONNALITÉS -->
     <section class="features">
         <h2>Ce que MyProphète vous apporte</h2>
-
         <div class="feature-grid">
             <div class="feature-card">
                 <h3>Guidance quotidienne</h3>
                 <p>Recevez chaque jour une guidance inspirante adaptée à votre énergie.</p>
             </div>
-
             <div class="feature-card">
                 <h3>Rituels personnalisés</h3>
                 <p>Des rituels spirituels conçus selon votre vibration du moment.</p>
             </div>
-
             <div class="feature-card">
                 <h3>Tirages intuitifs</h3>
                 <p>Des tirages simples et puissants pour éclairer vos décisions.</p>
             </div>
-
             <div class="feature-card">
                 <h3>Évolution spirituelle</h3>
                 <p>Suivez votre progression intérieure au fil du temps.</p>
             </div>
         </div>
     </section>
-
     <!-- POURQUOI -->
     <section class="why">
         <h2>Pourquoi MyProphète ?</h2>
         <p>
-            Parce que chaque âme mérite une lumière pour avancer.  
+            Parce que chaque âme mérite une lumière pour avancer.
             MyProphète vous accompagne avec douceur, intuition et sagesse.
         </p>
     </section>
-
     <!-- GALERIE PHOTOS -->
 <section class="gallery">
     <h2>Découvrez l’application</h2>
-
     <div class="gallery-grid">
         <img src="./images/screen1.jpg" onclick="openLightbox(0)">
         <img src="./images/screen2.jpg" onclick="openLightbox(1)">
@@ -95,7 +79,6 @@
         <img src="./images/screen6.jpg" onclick="openLightbox(5)">
     </div>
 </section>
-
 <!-- Lightbox ULTRA PRO -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
     <span class="arrow left" onclick="prevImage(event)">&#10094;</span>
@@ -103,27 +86,22 @@
     <span class="arrow right" onclick="nextImage(event)">&#10095;</span>
     <div id="lightbox-counter" class="counter"></div>
 </div>
-
     <!-- FAQ -->
     <section class="faq">
         <h2>FAQ</h2>
-
         <div class="faq-item">
             <h3>L’application est-elle gratuite ?</h3>
             <p>Oui, une version gratuite est disponible. Des fonctionnalités avancées seront proposées plus tard.</p>
         </div>
-
         <div class="faq-item">
             <h3>Quand l’application sera-t-elle disponible ?</h3>
             <p>La version mobile est en cours de finalisation et sera bientôt publiée sur les stores.</p>
         </div>
-
         <div class="faq-item">
             <h3>Sur quels appareils fonctionne MyProphète ?</h3>
             <p>Sur iOS et Android.</p>
         </div>
     </section>
-
     <!-- FOOTER -->
     <footer>
         <p>© 2025 MyProphète — Tous droits réservés</p>
@@ -135,14 +113,12 @@
             <a href="https://www.youtube.com/@MyProphete" target="_blank" rel="noopener noreferrer">YouTube</a>
             <a href="https://www.x.com/my_prophete" target="_blank" rel="noopener noreferrer">X</a>
         </div>
-        
-    </footer>
 
+    </footer>
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <img id="lightbox-img" src="">
 </div>
 
-    
 <script>
 const galleryImages = [
     "./images/screen1.jpg",
@@ -152,87 +128,69 @@ const galleryImages = [
     "./images/screen5.jpg",
     "./images/screen6.jpg"
 ];
-
 let currentIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
-
 function openLightbox(index) {
     currentIndex = index;
     updateLightbox();
     document.getElementById("lightbox").style.display = "flex";
 }
-
 function closeLightbox(event) {
     if (event.target.id === "lightbox" || event.target.classList.contains("counter")) {
         document.getElementById("lightbox").style.display = "none";
     }
 }
-
 function updateLightbox() {
     const img = document.getElementById("lightbox-img");
     const counter = document.getElementById("lightbox-counter");
-
     img.classList.add("fade-out");
-
     setTimeout(() => {
         img.src = galleryImages[currentIndex];
         img.classList.remove("fade-out");
     }, 200);
-
     counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
-
     preloadNextImage();
 }
-
 function nextImage(event) {
     event.stopPropagation();
     currentIndex = (currentIndex + 1) % galleryImages.length;
     updateLightbox();
 }
-
 function prevImage(event) {
     event.stopPropagation();
     currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
     updateLightbox();
 }
-
 function preloadNextImage() {
     const next = new Image();
     next.src = galleryImages[(currentIndex + 1) % galleryImages.length];
 }
-
 /* Navigation clavier */
 document.addEventListener("keydown", (e) => {
     const lb = document.getElementById("lightbox");
     if (lb.style.display !== "flex") return;
-
     if (e.key === "ArrowRight") nextImage(e);
     if (e.key === "ArrowLeft") prevImage(e);
     if (e.key === "Escape") lb.style.display = "none";
 });
-
 /* Swipe mobile */
 document.getElementById("lightbox").addEventListener("touchstart", (e) => {
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
 });
-
 document.getElementById("lightbox").addEventListener("touchend", (e) => {
     let dx = e.changedTouches[0].screenX - touchStartX;
     let dy = e.changedTouches[0].screenY - touchStartY;
-
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
         if (dx < 0) nextImage(e);
         else prevImage(e);
     }
-
     if (dy > 80) {
         document.getElementById("lightbox").style.display = "none";
     }
 });
 </script>
-
-
 </body>
 </html>
+
