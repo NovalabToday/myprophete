@@ -16,6 +16,13 @@
     Google Play       : package com.myprophete_app
   Le lien Apple ne mènera à une vraie fiche publique qu'une fois l'app
   effectivement publiée sur l'App Store — le code est prêt en avance.
+
+  CORRECTIF DU 03/09/2026 : sur certaines tablettes Android, Chrome envoie
+  un user-agent "façon ordinateur" (mode tablette optimisé desktop), donc
+  la simple détection par chaîne "android" dans le user-agent échouait et
+  redirigeait vers le site au lieu du Play Store. Ajout d'une vérification
+  via l'API Client Hints (navigator.userAgentData.platform), plus fiable
+  sur Chrome/Chromium, avant de retomber sur l'ancienne méthode.
 -->
 <html lang="fr">
 <head>
@@ -53,11 +60,27 @@
   var ANDROID_URL = "https://play.google.com/store/apps/details?id=com.myprophete_app";
   var DESKTOP_URL = "https://myprophete.com";
 
-  var ua = navigator.userAgent || navigator.vendor || "";
+  function detecterPlateforme() {
+    // Client Hints (Chrome/Chromium — Samsung Internet inclus) : plus
+    // fiable que le user-agent classique, notamment sur les tablettes
+    // Android où Chrome envoie parfois un user-agent "bureau".
+    var uaData = navigator.userAgentData;
+    if (uaData && uaData.platform) {
+      var p = uaData.platform.toLowerCase();
+      if (p === "android") return "android";
+    }
+    // Repli : user-agent classique (Safari iOS ne supporte pas Client Hints,
+    // donc iOS passe toujours par ici).
+    var ua = navigator.userAgent || navigator.vendor || "";
+    if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "ios";
+    if (/android/i.test(ua)) return "android";
+    return "desktop";
+  }
 
-  if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+  var plateforme = detecterPlateforme();
+  if (plateforme === "ios") {
     location.replace(IOS_URL);
-  } else if (/android/i.test(ua)) {
+  } else if (plateforme === "android") {
     location.replace(ANDROID_URL);
   } else {
     location.replace(DESKTOP_URL);
