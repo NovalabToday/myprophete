@@ -4,7 +4,6 @@ body {
     background: #efeeff;
     color: #2a1f4a;
 }
-
 /* SELECTEUR LANGUE */
 .lang-switch {
     position: absolute;
@@ -20,7 +19,6 @@ body {
     text-decoration: none;
     font-size: 1rem;
 }
-
 /* HERO */
 .hero {
     position: relative;
@@ -30,7 +28,6 @@ body {
     justify-content: center;
     text-align: center;
 }
-
 .hero-img {
     position: absolute;
     width: 100%;
@@ -39,26 +36,22 @@ body {
     top: 0;
     left: 0;
 }
-
 .hero-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     background: rgba(40, 0, 80, 0.55);
 }
-
 .hero-content {
     position: relative;
     z-index: 2;
     color: white;
     max-width: 600px;
 }
-
 .subtitle {
     font-size: 1.2rem;
     margin-bottom: 30px;
 }
-
 .app-icon {
     max-width: 120px;   /* taille max sur grand écran */
     width: 100%;        /* se réduit automatiquement */
@@ -69,34 +62,34 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     object-fit: contain;
 }
-
 .store-buttons {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
     align-items: center;
     margin-top: 25px;
     flex-wrap: wrap; /* permet aux éléments de passer à la ligne si nécessaire */
 }
-
+/* Empile les deux vignettes App Store / Google Play l'une sous l'autre
+   (02/09/2026, demandé par Bertrand) — regroupées dans un conteneur dédié
+   .store-badges-stack à l'intérieur de .store-buttons, plutôt que de
+   changer la direction de .store-buttons lui-même (qui contient aussi
+   l'icône de l'app, positionnée à côté de cette colonne). */
+.store-badges-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
 .store-badge img {
     max-width: 160px;   /* taille max sur grand écran */
     width: 100%;        /* se réduit automatiquement */
     height: auto;       /* garde les proportions */
     transition: transform 0.2s ease;
 }
-
 .store-badge img:hover {
     transform: scale(1.05);
 }
-
-.store-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-}
-
 .store-btn {
     padding: 12px 20px;
     background: #f4c542;
@@ -105,20 +98,17 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
-
 /* Galerie */
 .gallery {
     padding: 80px 20px;
     text-align: center;
 }
-
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 20px;
     margin-top: 40px;
 }
-
 .gallery-grid img {
     width: 100%;
     height: 260px;
@@ -127,12 +117,10 @@ body {
     cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
 .gallery-grid img:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
-
 /* Lightbox ULTRA PRO */
 .lightbox {
     display: none;
@@ -147,7 +135,6 @@ body {
     z-index: 99999;
     overflow: hidden;
 }
-
 /* Image */
 .lightbox img {
     max-width: 90%;
@@ -155,7 +142,6 @@ body {
     border-radius: 12px;
     transition: opacity 0.3s ease;
 }
-
 /* Fade animation */
 .fade {
     opacity: 1;
@@ -163,7 +149,6 @@ body {
 .fade-out {
     opacity: 0;
 }
-
 /* Flèches bold style Airbnb */
 .arrow {
     position: absolute;
@@ -178,20 +163,16 @@ body {
     user-select: none;
     transition: background 0.2s ease, transform 0.2s ease;
 }
-
 .arrow:hover {
     background: rgba(255,255,255,0.25);
     transform: translateY(-50%) scale(1.1);
 }
-
 .arrow.left {
     left: 30px;
 }
-
 .arrow.right {
     right: 30px;
 }
-
 /* Compteur */
 .counter {
     position: absolute;
@@ -200,7 +181,6 @@ body {
     font-size: 18px;
     opacity: 0.8;
 }
-
 /* Mobile */
 @media (max-width: 600px) {
     .arrow {
@@ -208,35 +188,29 @@ body {
         padding: 14px 18px;
     }
 }
-
-
 .lightbox img {
     max-width: 90%;
     max-height: 90%;
     border-radius: 12px;
     box-shadow: 0 0 25px rgba(255,255,255,0.2);
 }
-
 /* FEATURES */
 .features {
     padding: 80px 20px;
     text-align: center;
 }
-
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
     margin-top: 40px;
 }
-
 .feature-card {
     background: white;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
-
 /* WHY */
 .why {
     padding: 80px 20px;
@@ -244,27 +218,23 @@ body {
     background: #6a4bc3;
     color: white;
 }
-
 /* SCREENSHOTS */
 .screenshots {
     padding: 80px 20px;
     text-align: center;
 }
-
 .screens-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
     margin-top: 40px;
 }
-
 .screen-card {
     background: white;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
-
 .placeholder {
     background: #6a4bc3;
     color: white;
@@ -272,16 +242,13 @@ body {
     border-radius: 8px;
     font-weight: bold;
 }
-
 /* FAQ */
 .faq {
     padding: 80px 20px;
 }
-
 .faq-item {
     margin-bottom: 25px;
 }
-
 /* FOOTER */
 footer {
     padding: 40px;
@@ -289,9 +256,9 @@ footer {
     background: #2a1f4a;
     color: white;
 }
-
 .socials a {
     margin: 0 10px;
     color: #f4c542;
     text-decoration: none;
 }
+
