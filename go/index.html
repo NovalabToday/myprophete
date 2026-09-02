@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<!--
+  MyProphète — myprophete.com/go (smart redirect)
 
+  À déposer sur myprophete.com dans un dossier "go" contenant ce fichier
+  renommé index.html (même principe que le dossier "app" déjà en place
+  pour la relance J+5 : myprophete.com/go/ ).
+
+  Rôle : lien unique dans la bio TikTok (et légendes de vidéos) — détecte
+  l'appareil du visiteur et redirige automatiquement vers la bonne
+  destination, pour ne jamais envoyer un visiteur Android vers l'App
+  Store ou l'inverse (voir marketing/setup-tiktok.md §4).
+
+  IDs utilisés (fournis par Bertrand, 02/09/2026) :
+    App Store (iOS)   : Apple ID numérique 6802809138
+    Google Play       : package com.myprophete_app
+  Le lien Apple ne mènera à une vraie fiche publique qu'une fois l'app
+  effectivement publiée sur l'App Store — le code est prêt en avance.
+-->
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyProphète</title>
+<noscript><meta http-equiv="refresh" content="0;url=https://myprophete.com"></noscript>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: #0F0D0A; color: #F0EAD8;
+    font-family: Georgia, serif;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .carte { padding: 32px; max-width: 320px; }
+  h1 { color: #E8C47A; font-size: 18px; letter-spacing: 1px; margin: 0 0 16px; }
+  p { font-size: 14px; line-height: 1.6; color: #F0EAD8; margin: 0 0 24px; }
+  a.secours {
+    display: inline-block; background: #E8C47A; color: #0F0D0A;
+    font-size: 14px; font-weight: bold; text-decoration: none;
+    padding: 12px 24px; border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="carte">
+    <h1>Redirection en cours…</h1>
+    <p>Si rien ne se passe, clique ci-dessous.</p>
+    <a class="secours" href="https://myprophete.com">Ouvrir MyProphète</a>
+  </div>
+
+<script>
+  var IOS_URL = "https://apps.apple.com/app/id6802809138";
+  var ANDROID_URL = "https://play.google.com/store/apps/details?id=com.myprophete_app";
+  var DESKTOP_URL = "https://myprophete.com";
+
+  var ua = navigator.userAgent || navigator.vendor || "";
+
+  if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+    location.replace(IOS_URL);
+  } else if (/android/i.test(ua)) {
+    location.replace(ANDROID_URL);
+  } else {
+    location.replace(DESKTOP_URL);
+  }
+</script>
+</body>
+</html>
