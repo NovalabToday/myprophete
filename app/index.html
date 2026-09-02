@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<!--
+  MyProphète — page de redirection vers l'app (deep link)
+
+  À déposer sur myprophete.com, par exemple à l'adresse /app/ ou /app.html
+  (à côté de la page /go existante, sans y toucher).
+
+  Pourquoi cette page existe : les schémas d'URL personnalisés
+  (myprophete://...) mis directement dans un e-mail sont retirés par Gmail
+  et par Brevo lui-même (confirmé par le support Brevo sur son forum
+  communautaire, 2026 : "we send it, but browsers and email clients remove
+  it" — filtrage de sécurité). Un lien https:// classique, lui, n'est
+  jamais filtré. Cette page fait donc le pont : le CTA de l'e-mail pointe
+  ici, et c'est CETTE page (chargée dans le navigateur du téléphone) qui
+  tente d'ouvrir l'app via le deep link.
+
+  Format d'URL attendu :
+    https://myprophete.com/app?to=abonnement&highlight=mensuel
+
+  Paramètres :
+    to        — destination dans l'app (ex. "abonnement"). Optionnel,
+                défaut "abonnement".
+    highlight — abonnement à mettre en avant (ex. "mensuel"). Optionnel.
+    Tout autre paramètre présent dans l'URL est transmis tel quel au
+    deep link, donc pas besoin de modifier cette page pour une future
+    relance qui utiliserait d'autres paramètres.
+
+  Si l'app ne s'ouvre pas (pas installée, ou schéma bloqué) après un
+  court délai, redirection automatique vers la page de secours définie
+  ci-dessous (FALLBACK_URL) — à adapter par toi si besoin.
+-->
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyProphète</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: #0F0D0A; color: #F0EAD8;
+    font-family: Georgia, serif;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .carte { padding: 32px; max-width: 320px; }
+  h1 { color: #E8C47A; font-size: 18px; letter-spacing: 1px; margin: 0 0 16px; }
+  p { font-size: 14px; line-height: 1.6; color: #F0EAD8; margin: 0 0 24px; }
+  a.secours {
+    display: inline-block; background: #E8C47A; color: #0F0D0A;
+    font-size: 14px; font-weight: bold; text-decoration: none;
+    padding: 12px 24px; border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="carte">
+    <h1>Ouverture de MyProphète…</h1>
+    <p>
+      Si rien ne se passe, l'application n'est peut-être plus installée sur
+      cet appareil.
+    </p>
+    <a class="secours" href="#" id="lien-secours">Ouvrir le site MyProphète</a>
+  </div>
+
+<script>
+  // ---- À adapter par toi si besoin ----
+  // Page de repli si le deep link ne s'ouvre pas (app non installée, ou
+  // schéma bloqué par le navigateur). Simple page du site pour l'instant ;
+  // peut être remplacée plus tard par un lien direct vers l'App Store /
+  // Google Play si tu préfères.
+  var FALLBACK_URL = "https://myprophete.com";
+  var DELAI_SECOURS_MS = 1500;
+  // --------------------------------------
+
+  var params = new URLSearchParams(window.location.search);
+  var destination = params.get("to") || "abonnement";
+
+  // Reconstruit myprophete://<to>?<tous les autres paramètres reçus>
+  params.delete("to");
+  var reste = params.toString();
+  var deepLink = "myprophete://" + destination + (reste ? "?" + reste : "");
+
+  document.getElementById("lien-secours").href = FALLBACK_URL;
+
+  // Tentative d'ouverture de l'app
+  window.location.href = deepLink;
+
+  // Si l'app ne s'est pas ouverte (page toujours visible après le délai),
+  // on part sur la page de secours.
+  setTimeout(function () {
+    window.location.href = FALLBACK_URL;
+  }, DELAI_SECOURS_MS);
+</script>
+</body>
+</html>
 
