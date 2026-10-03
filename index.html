@@ -89,12 +89,12 @@
     <!-- VERSION WEB -->
     <section class="web-version">
         <h2>Accès direct depuis votre navigateur</h2>
-        <p class="web-subtitle">Pas encore disponible sur l'App Store dans votre pays ? Accédez à MyProphète immédiatement, sans aucune installation.</p>
+        <p class="web-subtitle">Pas encore disponible sur l'App Store dans votre pays ? Accédez à MyProphete immédiatement, sans aucune installation.</p>
         <a href="https://myprophete-a4d74.web.app" class="web-cta-btn" target="_blank" rel="noopener">
             ✦ Ouvrir MyProphète
         </a>
 
-        <p class="web-install-intro">Pour l'ajouter à votre écran d'accueil comme une vraie application :</p>
+        <p class="web-install-intro pulse-glow">✦ Pour l'ajouter à votre écran d'accueil comme une vraie application :</p>
 
         <div class="install-grid">
             <!-- iOS -->
@@ -372,7 +372,51 @@ document.getElementById("lightbox").addEventListener("touchend", (e) => {
         document.getElementById("lightbox").style.display = "none";
     }
 });
+/* Lightbox étapes d'installation */
+function openStepZoom(svgEl) {
+    const lb = document.getElementById("step-lightbox");
+    const container = document.getElementById("step-lightbox-svg");
+    container.innerHTML = svgEl.outerHTML;
+    lb.style.display = "flex";
+}
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".step-svg").forEach(svg => {
+        svg.style.cursor = "zoom-in";
+        svg.addEventListener("click", () => openStepZoom(svg));
+    });
+    document.getElementById("step-lightbox").addEventListener("click", function() {
+        this.style.display = "none";
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") document.getElementById("step-lightbox").style.display = "none";
+    });
+});
 </script>
+
+<!-- Lightbox zoom étapes installation -->
+<div id="step-lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:999999;justify-content:center;align-items:center;cursor:zoom-out;">
+    <div id="step-lightbox-svg" style="width:min(80vw,400px);height:auto;"></div>
+</div>
+
+<style>
+/* Animation pulsante dorée */
+@keyframes pulseGlow {
+    0%   { opacity: 1; text-shadow: 0 0 0px #f4c542; }
+    50%  { opacity: 0.65; text-shadow: 0 0 14px #f4c542, 0 0 30px rgba(244,197,66,0.4); }
+    100% { opacity: 1; text-shadow: 0 0 0px #f4c542; }
+}
+.pulse-glow {
+    animation: pulseGlow 2.2s ease-in-out infinite;
+    color: #f4c542 !important;
+    font-weight: 600 !important;
+    font-size: 1.05rem !important;
+    opacity: 1;
+}
+/* Indication zoom au survol */
+.step-svg:hover {
+    filter: drop-shadow(0 4px 14px rgba(244,197,66,0.55));
+}
+</style>
 </body>
 </html>
 
