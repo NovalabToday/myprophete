@@ -56,7 +56,7 @@ body {
     max-width: 120px;   /* taille max sur grand écran */
     width: 100%;        /* se réduit automatiquement */
     height: auto;       /* garde les proportions */
-    flex-shrink: 1; /* autorise l’icône à rétrécir */
+    flex-shrink: 1; /* autorise l'icône à rétrécir */
     border-radius: 20px;
     margin-right: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
@@ -242,6 +242,113 @@ body {
     border-radius: 8px;
     font-weight: bold;
 }
+/* VERSION WEB */
+.web-version {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(160deg, #1a0f3a 0%, #2a1f4a 100%);
+    color: white;
+}
+.web-version h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: #f4c542;
+}
+.web-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    max-width: 560px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+}
+.web-cta-btn {
+    display: inline-block;
+    background: #f4c542;
+    color: #1a0f3a;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(244,197,66,0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 48px;
+}
+.web-cta-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 28px rgba(244,197,66,0.5);
+}
+.web-install-intro {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-bottom: 40px;
+}
+.install-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 48px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.install-platform h3 {
+    margin-bottom: 24px;
+}
+.platform-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.ios-badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+}
+.android-badge {
+    background: rgba(100,210,120,0.15);
+    border: 1px solid rgba(100,210,120,0.3);
+}
+.install-steps {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.install-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100px;
+}
+.step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f4c542;
+    color: #1a0f3a;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.step-svg {
+    width: 80px;
+    height: 136px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+}
+.step-label {
+    font-size: 0.72rem;
+    line-height: 1.4;
+    opacity: 0.85;
+    text-align: center;
+    margin: 0;
+}
+
 /* FAQ */
 .faq {
     padding: 80px 20px;
@@ -261,4 +368,3 @@ footer {
     color: #f4c542;
     text-decoration: none;
 }
-
