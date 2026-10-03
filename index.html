@@ -376,7 +376,15 @@ document.getElementById("lightbox").addEventListener("touchend", (e) => {
 function openStepZoom(svgEl) {
     const lb = document.getElementById("step-lightbox");
     const container = document.getElementById("step-lightbox-svg");
-    container.innerHTML = svgEl.outerHTML;
+    const clone = svgEl.cloneNode(true);
+    clone.classList.remove("step-svg");
+    clone.style.width = "100%";
+    clone.style.height = "100%";
+    clone.style.filter = "none";
+    clone.style.maxWidth = "100%";
+    clone.style.maxHeight = "100%";
+    container.innerHTML = "";
+    container.appendChild(clone);
     lb.style.display = "flex";
 }
 document.addEventListener("DOMContentLoaded", () => {
@@ -399,18 +407,16 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 <style>
-/* Animation pulsante dorée */
+/* Animation alternance blanc / doré */
 @keyframes pulseGlow {
-    0%   { opacity: 1; text-shadow: 0 0 0px #f4c542; }
-    50%  { opacity: 0.65; text-shadow: 0 0 14px #f4c542, 0 0 30px rgba(244,197,66,0.4); }
-    100% { opacity: 1; text-shadow: 0 0 0px #f4c542; }
+    0%   { color: #ffffff; text-shadow: none; }
+    50%  { color: #f4c542; text-shadow: 0 0 18px rgba(244,197,66,0.9), 0 0 40px rgba(244,197,66,0.4); }
+    100% { color: #ffffff; text-shadow: none; }
 }
 .pulse-glow {
-    animation: pulseGlow 2.2s ease-in-out infinite;
-    color: #f4c542 !important;
-    font-weight: 600 !important;
+    animation: pulseGlow 1.4s ease-in-out infinite;
+    font-weight: 700 !important;
     font-size: 1.05rem !important;
-    opacity: 1;
 }
 /* Indication zoom au survol */
 .step-svg:hover {
