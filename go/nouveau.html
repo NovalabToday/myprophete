@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0F0D0A">
+<title>MyProphete</title>
+<style>
+  :root{
+    --fond:#0F0D0A; --texte:#F0EAD8; --or:#E8C47A; --or-fonce:#B8923F;
+    --voile:rgba(240,234,216,.08); --bord:rgba(232,196,122,.35);
+    --haut-titre:64px; --haut-barre:84px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--fond);color:var(--texte);font-family:Georgia,"Times New Roman",serif;-webkit-text-size-adjust:100%}
+  body{min-height:100vh;min-height:100dvh}
+  button,input{font:inherit}
+  .page{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+
+  /* ---------- Titre ---------- */
+  header{padding:14px 16px 6px;text-align:center}
+  h1{margin:0;font-weight:normal;color:var(--or);font-size:19px;line-height:1.25;letter-spacing:.2px}
+  .accroche{display:none;margin:12px 0 0;font-size:17px;line-height:1.5;color:var(--texte);opacity:.9}
+
+  /* ---------- Vidéo (9:16) ---------- */
+  .zone-video{flex:1;display:flex;justify-content:center;align-items:center;padding:6px 0 calc(var(--haut-barre) + 8px)}
+  .cadre{position:relative;aspect-ratio:9/16;height:var(--haut-video,60vh);max-width:100%;
+    border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 35%,#2a2114 0%,#15110a 70%);
+    border:1px solid var(--bord)}
+  video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent}
+  .lecture{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:16px;padding:20px;text-align:center;background:rgba(15,13,10,.35);border:0;color:var(--texte);cursor:pointer;width:100%}
+  .lecture .rond{width:68px;height:68px;border-radius:50%;border:2px solid var(--or);display:flex;align-items:center;justify-content:center}
+  .lecture .rond::after{content:"";margin-left:5px;border-left:20px solid var(--or);border-top:12px solid transparent;border-bottom:12px solid transparent}
+  .lecture .legende{font-size:16px;line-height:1.4;max-width:240px}
+  .lecture .indispo{font-size:13px;opacity:.7}
+  .cadre.joue .lecture{display:none}
+  .plein-ecran{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:10px;border:1px solid var(--bord);
+    background:rgba(15,13,10,.6);color:var(--or);cursor:pointer;font-size:18px;line-height:1;display:none}
+  .cadre.joue .plein-ecran{display:block}
+
+  /* ---------- Boutons ---------- */
+  .actions{display:flex;gap:10px}
+  .bouton{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:50px;padding:10px 12px;
+    border-radius:12px;text-decoration:none;cursor:pointer;font-size:16px;line-height:1.2}
+  .bouton.principal{background:linear-gradient(180deg,var(--or),var(--or-fonce));color:#1a1408;border:0;font-weight:bold}
+  .bouton.secondaire{background:transparent;color:var(--or);border:1px solid var(--or)}
+  .barre{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(15,13,10,.0),rgba(15,13,10,.96) 28%);backdrop-filter:blur(2px)}
+
+  /* ---------- Formulaire ---------- */
+  .feuille{position:fixed;inset:0;z-index:30;display:none;align-items:flex-end;background:rgba(0,0,0,.6)}
+  .feuille.ouverte{display:flex}
+  .carte{width:100%;max-height:92dvh;overflow:auto;background:#17130c;border-top:1px solid var(--bord);
+    border-radius:18px 18px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom))}
+  .carte h2{margin:0 0 4px;font-weight:normal;color:var(--or);font-size:20px}
+  .carte p.sous{margin:0 0 14px;font-size:15px;opacity:.85;line-height:1.4}
+  .fermer{float:right;background:none;border:0;color:var(--texte);font-size:26px;line-height:1;cursor:pointer;padding:0 4px}
+  label.champ{display:block;margin:0 0 12px;font-size:14px;opacity:.9}
+  label.champ input{display:block;width:100%;margin-top:5px;padding:13px 12px;font-size:16px;color:var(--texte);
+    background:var(--voile);border:1px solid var(--bord);border-radius:10px}
+  label.champ input:focus{outline:2px solid var(--or);outline-offset:1px}
+  .piege{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .suggestion{display:none;margin:-6px 0 12px;font-size:14px}
+  .suggestion button{background:none;border:0;color:var(--or);text-decoration:underline;cursor:pointer;padding:0;font-size:14px}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:4px 0 14px;font-size:13.5px;line-height:1.4;opacity:.9}
+  .consent input{margin-top:3px;width:20px;height:20px;flex:none;accent-color:#E8C47A}
+  .envoyer{width:100%;border:0;cursor:pointer}
+  .envoyer[disabled]{opacity:.4;cursor:not-allowed}
+  .message{display:none;margin:12px 0 0;font-size:15px;line-height:1.45}
+  .message.erreur{color:#ff9d8a}
+  .merci{display:none;text-align:center;padding:10px 0 4px}
+  .merci h2{margin-bottom:8px}
+
+  /* ---------- Ordinateur ---------- */
+  @media (min-width:900px){
+    .page{flex-direction:row;align-items:center;justify-content:center;gap:64px;padding:32px 48px}
+    header{order:2;text-align:left;padding:0;max-width:460px}
+    h1{font-size:34px;line-height:1.2}
+    .accroche{display:block}
+    .zone-video{order:1;flex:none;padding:0}
+    .cadre{height:min(78vh,680px)}
+    .colonne{order:2;max-width:460px}
+    .colonne header{order:0}
+    .barre{position:static;background:none;padding:22px 0 0;backdrop-filter:none}
+    .feuille{position:static;display:block;background:none;margin-top:18px}
+    .carte{max-height:none;border:1px solid var(--bord);border-radius:14px;padding:18px}
+    .fermer{display:none}
+    .zone-video{padding-bottom:0}
+  }
+  @media (max-width:899px){ .colonne{display:contents} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="colonne">
+    <header id="entete">
+      <h1 id="titre">MyProphete, ton oracle spirituel dans ta poche</h1>
+      <p class="accroche" id="accroche">Regarde la présentation, elle dure moins d'une minute.</p>
+    </header>
+
+    <!-- Boutons : barre fixe en bas sur téléphone, sous le titre sur ordinateur -->
+    <div class="barre" id="barre">
+      <div class="actions">
+        <a class="bouton principal" id="btn-inscrire" href="https://app.myprophete.com/">S'inscrire maintenant</a>
+        <button class="bouton secondaire" id="btn-savoir" type="button">En savoir plus</button>
+      </div>
+    </div>
+
+    <!-- Formulaire : feuille qui s'ouvre sur téléphone, bloc fixe sur ordinateur -->
+    <div class="feuille" id="feuille" role="dialog" aria-modal="true" aria-labelledby="titre-form">
+      <div class="carte">
+        <button class="fermer" id="fermer" type="button" aria-label="Fermer">&times;</button>
+        <div id="bloc-form">
+          <h2 id="titre-form">Reçois ton lien par e-mail</h2>
+          <p class="sous">Laisse ton prénom et ton adresse : tu recevras tout de suite le lien pour créer ton compte.</p>
+          <form id="form" novalidate>
+            <label class="champ">Prénom
+              <input type="text" name="prenom" id="prenom" autocomplete="given-name" maxlength="60" required>
+            </label>
+            <label class="champ">Adresse e-mail
+              <input type="email" name="email" id="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="120" required>
+            </label>
+            <div class="suggestion" id="suggestion">Voulais-tu écrire <button type="button" id="appliquer"></button> ?</div>
+            <div class="piege" aria-hidden="true"><label>Ne pas remplir <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
+            <label class="consent">
+              <input type="checkbox" id="consent">
+              <span>J'accepte de recevoir par e-mail mon lien d'inscription à MyProphete et un seul rappel le lendemain. Je peux me désinscrire à tout moment.</span>
+            </label>
+            <button class="bouton principal envoyer" id="envoyer" type="submit" disabled>Envoyer</button>
+            <div class="message" id="message" role="status"></div>
+          </form>
+        </div>
+        <div class="merci" id="merci">
+          <h2>Regarde ta boîte mail</h2>
+          <p class="sous">Ton lien vient de partir. Si tu ne le vois pas dans quelques minutes, regarde aussi dans les courriers indésirables.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-video">
+    <div class="cadre" id="cadre">
+      <video id="video" playsinline preload="metadata" poster="video/go-apercu.jpg">
+        <source src="video/go-presentation.mp4" type="video/mp4">
+      </video>
+      <button class="lecture" id="lecture" type="button" aria-label="Lancer la vidéo de présentation">
+        <span class="rond"></span>
+        <span class="legende" id="legende">Regarde la présentation, elle dure moins d'une minute.</span>
+        <span class="indispo" id="indispo" hidden>Vidéo bientôt disponible</span>
+      </button>
+      <button class="plein-ecran" id="plein" type="button" aria-label="Plein écran">&#x26F6;</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ============ RÉGLAGES ============ */
+  // Adresse de la fonction Cloud qui enregistre le contact et déclenche l'e-mail (à renseigner au déploiement).
+  var ADRESSE_ENVOI = '';
+  var ADRESSE_APP   = 'https://app.myprophete.com/';
+  var ETIQUETTE_PAR_DEFAUT = 'general';
+
+  // Titres validés, un par étiquette de lien (/go?angle=...). Étiquette absente ou inconnue : titre général.
+  var TITRES = {
+    general:   'MyProphete, ton oracle spirituel dans ta poche',
+    mission:   'Découvre la mission de ton âme',
+    portrait:  'Découvre ton portrait astral',
+    synastrie: 'Découvre ta compatibilité en amour et en amitié',
+    question:  'Pose ta question, l\'oracle te répond',
+    horoscope: 'Ton horoscope du jour, personnalisé'
+  };
+
+  function $(id){ return document.getElementById(id); }
+
+  /* ============ ÉTIQUETTE DE LA PUBLICITÉ ============ */
+  var params = new URLSearchParams(location.search);
+  var angle = (params.get('angle') || '').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,30);
+  var cle = TITRES[angle] ? angle : ETIQUETTE_PAR_DEFAUT;
+  $('titre').textContent = TITRES[cle];
+  document.title = 'MyProphete';
+
+  // Lien « S'inscrire maintenant » : on transmet l'origine pour mesurer quelle publicité amène des inscrits.
+  var lien = new URL(ADRESSE_APP);
+  lien.searchParams.set('source', 'go');
+  lien.searchParams.set('angle', angle || ETIQUETTE_PAR_DEFAUT);
+  ['utm_source','utm_medium','utm_campaign','utm_content','fbclid'].forEach(function(k){
+    if (params.get(k)) lien.searchParams.set(k, params.get(k));
+  });
+  $('btn-inscrire').href = lien.toString();
+
+  /* ============ TAILLE DE LA VIDÉO (9:16 ajusté à l'écran) ============ */
+  var ordinateur = window.matchMedia('(min-width:900px)');
+  function ajuster(){
+    var r = document.documentElement.style;
+    if (ordinateur.matches){ r.removeProperty('--haut-video'); return; }
+    var h = window.innerHeight;
+    var entete = $('entete').offsetHeight;
+    var barre = $('barre').offsetHeight;
+    var dispo = h - entete - barre - 20;
+    var maxLarg = (window.innerWidth - 0) * 16 / 9;       // jamais plus large que l'écran
+    r.setProperty('--haut-video', Math.max(220, Math.min(dispo, maxLarg)) + 'px');
+    document.querySelector('.zone-video').style.paddingBottom = (barre + 6) + 'px';
+  }
+  window.addEventListener('resize', ajuster);
+  window.addEventListener('orientationchange', function(){ setTimeout(ajuster, 200); });
+  ajuster();
+  setTimeout(ajuster, 300);
+
+  /* ============ VIDÉO ============ */
+  var video = $('video'), cadre = $('cadre');
+  var sourceOk = true;
+  video.addEventListener('error', function(){ sourceOk = false; $('indispo').hidden = false; }, true);
+  var sources = video.querySelectorAll('source');
+  if (sources.length) sources[sources.length-1].addEventListener('error', function(){ sourceOk = false; $('indispo').hidden = false; });
+
+  $('lecture').addEventListener('click', function(){
+    if (!sourceOk) return;
+    cadre.classList.add('joue');
+    video.controls = true;
+    var p = video.play();
+    if (p && p.catch) p.catch(function(){ cadre.classList.remove('joue'); });
+  });
+  video.addEventListener('ended', function(){ video.controls = false; });
+  $('plein').addEventListener('click', function(){
+    if (video.requestFullscreen) video.requestFullscreen();
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+    else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+  });
+
+  /* ============ FORMULAIRE ============ */
+  var feuille = $('feuille');
+  function ouvrir(){
+    if (ordinateur.matches){ $('prenom').focus(); return; }
+    feuille.classList.add('ouverte');
+    setTimeout(function(){ $('prenom').focus(); }, 150);
+  }
+  function fermer(){ feuille.classList.remove('ouverte'); }
+  $('btn-savoir').addEventListener('click', ouvrir);
+  $('fermer').addEventListener('click', fermer);
+  feuille.addEventListener('click', function(e){ if (e.target === feuille) fermer(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') fermer(); });
+
+  var consent = $('consent'), envoyer = $('envoyer');
+  consent.addEventListener('change', function(){ envoyer.disabled = !consent.checked; });
+
+  // Détection des fautes de frappe courantes dans le domaine de l'adresse.
+  var DOMAINES = {
+    'gmial.com':'gmail.com','gmai.com':'gmail.com','gamil.com':'gmail.com','gmail.co':'gmail.com','gmail.fr':'gmail.com','gnail.com':'gmail.com','gmail.con':'gmail.com',
+    'hotmial.com':'hotmail.com','hotmail.con':'hotmail.com','hotmal.com':'hotmail.com','hotmail.co':'hotmail.com',
+    'outlok.com':'outlook.com','outlook.con':'outlook.com','outloo.com':'outlook.com',
+    'yahou.fr':'yahoo.fr','yaho.fr':'yahoo.fr','yahoo.con':'yahoo.com','yahooo.com':'yahoo.com',
+    'orage.fr':'orange.fr','orange.com':'orange.fr','wanadoo.com':'wanadoo.fr','free.com':'free.fr','sfr.com':'sfr.fr',
+    'icloud.con':'icloud.com','iclould.com':'icloud.com','protonmail.con':'protonmail.com'
+  };
+  var proposition = '';
+  function verifierAdresse(){
+    var v = $('email').value.trim();
+    var m = v.match(/^([^@\s]+)@([^@\s]+)$/);
+    var s = $('suggestion');
+    proposition = '';
+    if (m && DOMAINES[m[2].toLowerCase()]){
+      proposition = m[1] + '@' + DOMAINES[m[2].toLowerCase()];
+      $('appliquer').textContent = proposition;
+      s.style.display = 'block';
+    } else { s.style.display = 'none'; }
+  }
+  $('email').addEventListener('blur', verifierAdresse);
+  $('email').addEventListener('input', function(){ $('suggestion').style.display = 'none'; });
+  $('appliquer').addEventListener('click', function(){
+    if (proposition){ $('email').value = proposition; $('suggestion').style.display = 'none'; }
+  });
+
+  function montrer(texte, erreur){
+    var m = $('message'); m.textContent = texte; m.className = 'message' + (erreur ? ' erreur' : ''); m.style.display = 'block';
+  }
+  var REGLE_MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  $('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var prenom = $('prenom').value.trim();
+    var email = $('email').value.trim();
+    if ($('site').value) return;                      // champ piège rempli : robot
+    if (!prenom){ montrer('Indique ton prénom.', true); $('prenom').focus(); return; }
+    if (!REGLE_MAIL.test(email)){ montrer('Cette adresse e-mail ne semble pas valide.', true); $('email').focus(); return; }
+    if (!consent.checked){ montrer('Coche la case pour recevoir ton lien.', true); return; }
+    if (!ADRESSE_ENVOI){ montrer('Le formulaire sera actif dès la mise en ligne de l\'envoi des e-mails.', true); return; }
+
+    envoyer.disabled = true; montrer('Envoi en cours…', false);
+    fetch(ADRESSE_ENVOI, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        prenom: prenom, email: email, consentement: true,
+        angle: angle || ETIQUETTE_PAR_DEFAUT, page: 'go',
+        langue: 'fr',
+        utm: { source: params.get('utm_source')||'', campagne: params.get('utm_campaign')||'', contenu: params.get('utm_content')||'' }
+      })
+    }).then(function(r){
+      if (!r.ok) throw new Error('http ' + r.status);
+      $('bloc-form').style.display = 'none';
+      $('merci').style.display = 'block';
+    }).catch(function(){
+      envoyer.disabled = !consent.checked;
+      montrer('Un problème est survenu. Réessaie dans un instant.', true);
+    });
+  });
+})();
+</script>
+</body>
+</html>
