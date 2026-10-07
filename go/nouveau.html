@@ -62,8 +62,10 @@
     background:var(--voile);border:1px solid var(--bord);border-radius:10px}
   label.champ input:focus{outline:2px solid var(--or);outline-offset:1px}
   .piege{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-  .suggestion{display:none;margin:-6px 0 12px;font-size:14px}
-  .suggestion button{background:none;border:0;color:var(--or);text-decoration:underline;cursor:pointer;padding:0;font-size:14px}
+  .erreur-champ{display:none;margin:-6px 0 12px;font-size:14px;line-height:1.4;color:#ff9d8a}
+  label.champ input.invalide{border-color:#ff9d8a}
+  .suggestion{display:none;margin:-6px 0 12px;font-size:14px;line-height:1.5;padding:10px 12px;border:1px solid var(--or);border-radius:10px;background:rgba(232,196,122,.08)}
+  .suggestion button{background:none;border:0;color:var(--or);text-decoration:underline;cursor:pointer;padding:0;font-size:15px;font-weight:bold}
   .consent{display:flex;gap:10px;align-items:flex-start;margin:4px 0 14px;font-size:13.5px;line-height:1.4;opacity:.9}
   .consent input{margin-top:3px;width:20px;height:20px;flex:none;accent-color:#E8C47A}
   .envoyer{width:100%;border:0;cursor:pointer}
@@ -123,6 +125,7 @@
             <label class="champ">Adresse e-mail
               <input type="email" name="email" id="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="120" required>
             </label>
+            <div class="erreur-champ" id="erreur-email" role="alert"></div>
             <div class="suggestion" id="suggestion">Voulais-tu écrire <button type="button" id="appliquer"></button> ?</div>
             <div class="piege" aria-hidden="true"><label>Ne pas remplir <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
             <label class="consent">
@@ -250,31 +253,96 @@
   var consent = $('consent'), envoyer = $('envoyer');
   consent.addEventListener('change', function(){ envoyer.disabled = !consent.checked; });
 
-  // Détection des fautes de frappe courantes dans le domaine de l'adresse.
-  var DOMAINES = {
-    'gmial.com':'gmail.com','gmai.com':'gmail.com','gamil.com':'gmail.com','gmail.co':'gmail.com','gmail.fr':'gmail.com','gnail.com':'gmail.com','gmail.con':'gmail.com',
-    'hotmial.com':'hotmail.com','hotmail.con':'hotmail.com','hotmal.com':'hotmail.com','hotmail.co':'hotmail.com',
-    'outlok.com':'outlook.com','outlook.con':'outlook.com','outloo.com':'outlook.com',
-    'yahou.fr':'yahoo.fr','yaho.fr':'yahoo.fr','yahoo.con':'yahoo.com','yahooo.com':'yahoo.com',
-    'orage.fr':'orange.fr','orange.com':'orange.fr','wanadoo.com':'wanadoo.fr','free.com':'free.fr','sfr.com':'sfr.fr',
-    'icloud.con':'icloud.com','iclould.com':'icloud.com','protonmail.con':'protonmail.com'
-  };
-  var proposition = '';
-  function verifierAdresse(){
-    var v = $('email').value.trim();
-    var m = v.match(/^([^@\s]+)@([^@\s]+)$/);
-    var s = $('suggestion');
-    proposition = '';
-    if (m && DOMAINES[m[2].toLowerCase()]){
-      proposition = m[1] + '@' + DOMAINES[m[2].toLowerCase()];
-      $('appliquer').textContent = proposition;
-      s.style.display = 'block';
-    } else { s.style.display = 'none'; }
+  // ----- Contrôle de l'adresse e-mail -----
+  // Domaines courants : une adresse dont le domaine en est proche (1 ou 2 lettres d'écart) est signalée.
+  var DOMAINES_COURANTS = ['gmail.com','hotmail.com','hotmail.fr','outlook.com','outlook.fr','yahoo.com','yahoo.fr',
+    'orange.fr','wanadoo.fr','free.fr','sfr.fr','laposte.net','icloud.com','me.com','live.fr','live.com','msn.com',
+    'protonmail.com','proton.me','bbox.fr','neuf.fr','aol.com','gmx.fr','gmx.com','gmx.net','mail.ru','yandex.ru','abv.bg'];
+  // Fautes très fréquentes, corrigées directement.
+  var CORRECTIONS = {'gmail.co':'gmail.com','gmail.fr':'gmail.com','gmail.con':'gmail.com','gmail.cm':'gmail.com','gmail.om':'gmail.com',
+    'gmail.comm':'gmail.com','hotmail.con':'hotmail.com','hotmail.co':'hotmail.com','hotmail.cm':'hotmail.com',
+    'outlook.con':'outlook.com','yahoo.con':'yahoo.com','yahoo.cm':'yahoo.com','orange.com':'orange.fr','orange.f':'orange.fr',
+    'wanadoo.com':'wanadoo.fr','free.com':'free.fr','sfr.com':'sfr.fr','icloud.con':'icloud.com','protonmail.con':'protonmail.com'};
+
+  function distance(a, b){
+    var m = a.length, n = b.length, d = [], i, j;
+    for (i = 0; i <= m; i++){ d[i] = [i]; }
+    for (j = 1; j <= n; j++){ d[0][j] = j; }
+    for (i = 1; i <= m; i++){
+      for (j = 1; j <= n; j++){
+        d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+      }
+    }
+    return d[m][n];
   }
-  $('email').addEventListener('blur', verifierAdresse);
-  $('email').addEventListener('input', function(){ $('suggestion').style.display = 'none'; });
+
+  // Renvoie un texte d'erreur si l'adresse est mal formée, sinon une chaîne vide.
+  function erreurAdresse(v){
+    if (!v) return 'Indique ton adresse e-mail.';
+    if (/\s/.test(v)) return 'Cette adresse contient un espace.';
+    if (v.indexOf('@') === -1) return 'Il manque le @ dans ton adresse.';
+    if ((v.match(/@/g) || []).length > 1) return 'Ton adresse contient plusieurs @.';
+    var parties = v.split('@'), local = parties[0], domaine = parties[1];
+    if (!local) return 'Il manque le début de ton adresse, avant le @.';
+    if (!domaine) return 'Il manque la fin de ton adresse, après le @ (par exemple gmail.com).';
+    if (domaine.indexOf('.') === -1) return 'Il manque la fin de ton adresse, par exemple « .com » ou « .fr ».';
+    if (/\.\./.test(v) || /^\./.test(local) || /\.$/.test(local) || /^\./.test(domaine) || /\.$/.test(domaine)) return 'Il y a un point mal placé dans ton adresse.';
+    if (!REGLE_MAIL.test(v)) return 'Cette adresse e-mail ne semble pas valide.';
+    return '';
+  }
+
+  // Renvoie l'adresse corrigée proposée, ou une chaîne vide.
+  function propositionAdresse(v){
+    var m = v.match(/^([^@\s]+)@([^@\s]+)$/);
+    if (!m) return '';
+    var domaine = m[2].toLowerCase();
+    if (CORRECTIONS[domaine]) return m[1] + '@' + CORRECTIONS[domaine];
+    if (DOMAINES_COURANTS.indexOf(domaine) !== -1) return '';
+    var meilleur = '', ecart = 3;
+    DOMAINES_COURANTS.forEach(function(c){
+      var e = distance(domaine, c);
+      if (e < ecart){ ecart = e; meilleur = c; }
+    });
+    // Un domaine très court est trop ambigu pour être comparé.
+    return (meilleur && ecart <= 2 && domaine.length >= 6) ? m[1] + '@' + meilleur : '';
+  }
+
+  var proposition = '';
+  var propositionVue = false;      // la personne a déjà vu cette proposition et choisit de garder son adresse
+  function effacerSignaux(){
+    $('erreur-email').style.display = 'none';
+    $('email').classList.remove('invalide');
+    $('suggestion').style.display = 'none';
+    $('message').style.display = 'none';
+  }
+  function signalerAdresse(){
+    var v = $('email').value.trim();
+    effacerSignaux();
+    proposition = '';
+    if (!v) return true;
+    var err = erreurAdresse(v);
+    if (err){
+      $('erreur-email').textContent = err;
+      $('erreur-email').style.display = 'block';
+      $('email').classList.add('invalide');
+      return false;
+    }
+    proposition = propositionAdresse(v);
+    if (proposition){
+      $('appliquer').textContent = proposition;
+      $('suggestion').style.display = 'block';
+    }
+    return true;
+  }
+  var minuteur = null;
+  $('email').addEventListener('input', function(){
+    effacerSignaux(); propositionVue = false;
+    clearTimeout(minuteur);
+    minuteur = setTimeout(signalerAdresse, 900);   // vérification dès que la saisie s'arrête
+  });
+  $('email').addEventListener('blur', function(){ clearTimeout(minuteur); signalerAdresse(); });
   $('appliquer').addEventListener('click', function(){
-    if (proposition){ $('email').value = proposition; $('suggestion').style.display = 'none'; }
+    if (proposition){ $('email').value = proposition; proposition = ''; effacerSignaux(); propositionVue = true; }
   });
 
   function montrer(texte, erreur){
@@ -288,7 +356,15 @@
     var email = $('email').value.trim();
     if ($('site').value) return;                      // champ piège rempli : robot
     if (!prenom){ montrer('Indique ton prénom.', true); $('prenom').focus(); return; }
-    if (!REGLE_MAIL.test(email)){ montrer('Cette adresse e-mail ne semble pas valide.', true); $('email').focus(); return; }
+    var ok = signalerAdresse();
+    if (!ok){ $('email').focus(); $('erreur-email').scrollIntoView({block:'center', behavior:'smooth'}); return; }
+    if (proposition && !propositionVue){
+      // Première tentative avec une adresse suspecte : on la signale, un second appui sur « Envoyer » la confirme.
+      propositionVue = true;
+      $('suggestion').scrollIntoView({block:'center', behavior:'smooth'});
+      montrer('Vérifie ton adresse ci-dessus. Si elle est correcte, appuie à nouveau sur « Envoyer ».', true);
+      return;
+    }
     if (!consent.checked){ montrer('Coche la case pour recevoir ton lien.', true); return; }
     if (!ADRESSE_ENVOI){ montrer('Le formulaire sera actif dès la mise en ligne de l\'envoi des e-mails.', true); return; }
 
